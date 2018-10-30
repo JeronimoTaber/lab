@@ -5,7 +5,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-
+#include "mod.h"
 void show(long count[]);
 void mod_c(char *buffers ,sem_t *sem_c, sem_t *sem_cf, int *eof,int leido2) {
 	int a = 0 ;

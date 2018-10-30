@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-
+#include "mod.h"
 void upper(char *str);
 void mod_u(char *buffer, sem_t *sem_u, sem_t *sem_uf,int *eof,int leido2) {
 

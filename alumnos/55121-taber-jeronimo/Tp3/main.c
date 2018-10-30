@@ -6,17 +6,17 @@
 #include <sys/mman.h>
 #include <sys/wait.h>
 #include <semaphore.h>
-
+#include "mod.h"
 int fileopen(int argc, char ** argv);
-extern void mod_c();
-extern void mod_u();
+//extern void mod_c();
+//extern void mod_u();
 int main(int argc, char ** argv){
 	int *leido2 = NULL;	
 	int leido,pidc,pidu;
 	char *ptr=NULL, *sema=NULL;
 	sem_t *sem_c,*sem_cf,*sem_u,*sem_uf,*sem_en;
 	int fd = fileopen(argc, argv);//llama a funcion fileopen
-	ptr = mmap(NULL,sizeof(ptr),PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_SHARED, -1, 0);
+	ptr = mmap(NULL,1024 ,PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_SHARED, -1, 0);
         int *eof = mmap(NULL, sizeof(sem_t), PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_SHARED, -1, 0);
 
 	leido2 = mmap(NULL, sizeof(int), PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_SHARED, -1, 0);
@@ -48,7 +48,7 @@ int main(int argc, char ** argv){
 	return 0;
         }
 
-	while((*leido2  = read(fd, ptr, sizeof ptr)) > 0) {
+	while((*leido2  = read(fd, ptr, 1024)) > 0) {
 		sem_post(sem_cf);
 		sem_post(sem_uf);	
 		sem_wait(sem_c);
